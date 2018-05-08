@@ -78,11 +78,11 @@
 						</button>
 					</div>
 
-					Ashish
-
 					
 				</form>
+				<p style="padding-top:20px; padding-left:60px"><b>Designed By: </b>Dhairya Chandra</p>
 			</div>
+			
 		</div>
 	</div>
 	

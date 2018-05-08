@@ -188,7 +188,7 @@ li a:hover {
 </tr>
 <tr>
 <td style="width: 30%;">Mobile No: </td>
-<td style="width: 70%;"><input type="text" placeholder="Enter Mobile Number" name="num" placeholder="^[0-9]{10}$" required></td>
+<td style="width: 70%;"><input type="text" placeholder="Enter 10 Digit Mobile Number" name="num" pattern="[6789][0-9]{9}" required></td>
 </tr>
 <tr>
 <td style="width: 10%;">City: </td>
