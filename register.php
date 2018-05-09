@@ -1,6 +1,5 @@
 <?php
 
-
 	$servername = "localhost";
     $username = "root";
     $password = "";
@@ -10,35 +9,23 @@
     $con = mysqli_connect($servername, $username, $password,$db);
 
     // Check connection
-    if (!$con) {
+    if (!$con){
       die("Connection failed: " . mysqli_connect_error());
     }
+    session_start();
+    if(isset($_SESSION["uid"])){
+        $id=$_SESSION["uid"];
+        $sql="select * from admin where id=$id LIMIT 1";
+        $run_query=mysqli_query($con,$sql);
+        while($row=mysqli_fetch_array($run_query)){ 
+            $f=$row["first"];
+   	        $s=$row["second"];
+        }
+    }
+    else
+ 	    header('Location:index.php');
 
-
- session_start();
-
- if(isset($_SESSION["uid"]))
- 
-{ $id=$_SESSION["uid"];
- $sql="select * from admin where id=$id LIMIT 1";
- $run_query=mysqli_query($con,$sql);
-
-   while($row=mysqli_fetch_array($run_query))
-   { 
-   	$f=$row["first"];
-   	$s=$row["second"];
-
-   }
-
-}
- 
- else
- 	header('Location:index.php');
-
-
-
- date_default_timezone_set("Asia/Kolkata");
-
+    date_default_timezone_set("Asia/Kolkata");
 
  ?>
 
@@ -232,59 +219,44 @@ li a:hover {
 </body>
 </html>
 
-
-
 <?php
-if(isset($_POST["submit"]))
-{
+    if(isset($_POST["submit"])){
+        $name=$_POST["name"];
+        $fname=$_POST["fname"];
+        $mobile=$_POST["num"];
+        $city=$_POST["city"];
+        $address=$_POST["address"];
+        $date=date("y-m-d");
+        $time=date("h:i:s",time());
+        $fn=$_FILES['upfile'] ['name'];
+        $purpose=$_POST["purpose"];
+        $gate=$_POST["gate"];
 
+        $filebasename=basename($_FILES['upfile'] ['name']);
+        $ext=strtolower(substr($filebasename,strrpos($filebasename,'.')+1));
 
-	$name=$_POST["name"];
-	$mobile=$_POST["num"];
-	$city=$_POST["city"];
-	$address=$_POST["address"];
-	$date=date("y-m-d");
-	$time=date("h:i:s",time());
-	$fn=$_FILES['upfile'] ['name'];
-    $purpose=$_POST["purpose"];
-    $gate=$_POST["gate"];
-    $fname=$_POST["fname"];
+        if(($ext=="jpg" || $ext=="jpeg" || $ext=="JPG") && ( $_FILES["upfile"]["type"]=="image/jpg" || $_FILES["upfile"]["type"]=="image/jpeg")){
+             $desired_dir="photo/";
+             $file_name=$_FILES['upfile'] ['name'];
 
-	
-	
-	$filebasename=basename($_FILES['upfile'] ['name']);
-	$ext=strtolower(substr($filebasename,strrpos($filebasename,'.')+1));
-
-	if(($ext=="jpg" || $ext=="jpeg" || $ext=="JPG") && ( $_FILES["upfile"]["type"]=="image/jpg" || $_FILES["upfile"]["type"]=="image/jpeg"))
-        
-	   {
-		 $desired_dir="photo/";
-		 $file_name=$_FILES['upfile'] ['name'];
-
-		 if(file_exists($desired_dir . $file_name)){
-		 	echo $file_name."is already exist.";
-		 }
-		 else
-		 {     $sql="INSERT INTO `visitor`(number,name,address,city,gid,file,purpose,gate,fname) VALUES ('$mobile','$name','$address','$city','$id','$file_name','$purpose','$gate','$fname')";
-		      $result=mysqli_query($con,$sql);
-
-		      if($result){
-
-		 	   move_uploaded_file($_FILES["upfile"]["tmp_name"],$desired_dir.$file_name);
-		 	   echo "Data is SUCESSFULLY UPLOAD.";
-               echo "<a href='generate.php?f=$file_name' target=_blank>GENERATE PASS</A>";
-                  
-                    
-
-		 	}
-		 	   else
-		 	   	echo " error";
-		 
-		 }
-	}
-	else
-		 { echo "INSERTION OF INFORMATION IS FAILED!!";}
-}
-
+             if(file_exists($desired_dir . $file_name)){
+                echo $file_name."is already exist.";
+             }
+             else{
+                 $sql="INSERT INTO `visitor`(number,name,address,city,gid,file,purpose,gate,fname) VALUES                      ('$mobile','$name','$address','$city','$id','$file_name','$purpose','$gate','$fname')";
+                 $result=mysqli_query($con,$sql);
+                 if($result){
+                     move_uploaded_file($_FILES["upfile"]["tmp_name"],$desired_dir.$file_name);
+                     echo "Data is SUCESSFULLY UPLOAD.";
+                     echo "<a href='generate.php?f=$file_name' target=_blank>GENERATE PASS</A>";
+                 }
+                 else
+                     echo " error";
+            }
+        }
+        else{
+            echo "INSERTION OF INFORMATION IS FAILED!!";
+        }
+    }
 
 ?>

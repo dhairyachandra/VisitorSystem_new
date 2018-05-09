@@ -126,7 +126,7 @@ if(isset($_POST['admin'])){
 	{echo "
 				<div class='alert alert-warning'>
 						<a href='#' class='close' data-dismiss='alert' aria-label='close' >&times;</a>
-						<b >not valid admin</b>
+						<b >Not valid admin</b>
 				</div>
 			";
 	}
