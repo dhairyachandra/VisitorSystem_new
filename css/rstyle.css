@@ -110,10 +110,19 @@ li a:hover {
      
 }
 .cam{
-    border: 1px solid #000;
+    
     width: 47%;
     align-content: flex-start;
     margin-bottom: 20px;
     margin-right: 20px;
     float: right;
+}
+#my_camera{
+        width: 200px;
+        height: 90px;
+       
+    }
+#results{
+    width: 200px;
+    height: 90px;
 }

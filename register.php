@@ -34,6 +34,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/rstyle.css">
+	<script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+	
 </head>
 <body>
 
@@ -50,7 +52,8 @@
 
 <form action=""  method="POST" enctype="multipart/form-data">
   <center><div class="container">
-   <img width="50%" height="50%" src="images/gl.png">
+          <img width="50%" height="50%" src="images/gl.png">
+   
     <h3>VISITOR PASS ENTRY</h3>
     
     <hr>
@@ -111,8 +114,36 @@
 </form>
 </center>
 <div class="cam">
-   <h3>Web Cam Here...</h3>
+   <div id="my_camera"></div><br>
+	<input style="margin-left:16%;" type=button value="Take Snapshot" onClick="take_snapshot()">
+	
+    <div id="results" ></div>
     
+    <!-- Configure a few settings and attach camera -->
+	<script type="text/javascript">
+		Webcam.set({
+			width: 320,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+		Webcam.attach( '#my_camera' );
+	</script>
+	<!-- A button for taking snaps -->
+	
+	<!-- Code to handle taking the snapshot and displaying it locally -->
+	<script type="text/javascript">
+
+		function take_snapshot() {
+			
+			// take snapshot and get image data
+			Webcam.snap( function(data_uri) {
+				// display results in page
+				document.getElementById('results').innerHTML = 
+					'<img src="'+data_uri+'"/>';
+			} );
+		}
+	</script>
 </div>
 
 </body>
