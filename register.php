@@ -33,115 +33,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-}
-
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-}
-
-button:hover {
-    opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 49%;
-  margin-left:3px;
-  margin-top:5px;
-
-}
-
-/* Add padding to container elements */
-.container {
-    margin-top: 20px;
-    border: none;
-    padding: 16px;
-    width:50%;
-    background-color: ghostwhite;
-    
-
-}
-
-/* Clear floats */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-       width: 100%;
-    }
-}
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111;
-}
-
-.ex{
-     position:absolute;
-     
-}
-</style>
+	<link rel="stylesheet" type="text/css" href="css/rstyle.css">
 </head>
 <body>
 
@@ -156,7 +48,7 @@ li a:hover {
 
 
 
-<form action="" style="border:1px solid #ccc" method="POST" enctype="multipart/form-data">
+<form action=""  method="POST" enctype="multipart/form-data">
   <center><div class="container">
    <img width="50%" height="50%" src="images/gl.png">
     <h3>VISITOR PASS ENTRY</h3>
@@ -214,8 +106,15 @@ li a:hover {
         <a href='generate.php?f=$file_name' target=_blank><button type="submit" class="signupbtn" name="submit">Submit</button></a>
     </div>
   </div>
+  <br>
+  <br>
 </form>
 </center>
+<div class="cam">
+   <h3>Web Cam Here...</h3>
+    
+</div>
+
 </body>
 </html>
 
@@ -240,7 +139,7 @@ li a:hover {
              $file_name=$_FILES['upfile'] ['name'];
 
              if(file_exists($desired_dir . $file_name)){
-                echo $file_name."is already exist.";
+                echo $file_name." already exist.";
              }
              else{
                  $sql="INSERT INTO `visitor`(number,name,address,city,gid,file,purpose,gate,fname) VALUES                      ('$mobile','$name','$address','$city','$id','$file_name','$purpose','$gate','$fname')";
